@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="kristineModelStoreContainer" CdmEntityContainer="kristineEntities1">
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="kristineModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="role1" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="kristineModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

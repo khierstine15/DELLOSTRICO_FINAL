@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="kristineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="255" />
+          <Property Name="last_name" Type="varchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="age" Type="int" />
+          <Property Name="address" Type="varchar" MaxLength="255" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="role_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kristineModelStoreContainer">
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kristineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="users" Relationship="Self.FK_user_role" FromRole="role" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="role_id" Type="Int32" />
+          <NavigationProperty Name="role" Relationship="Self.FK_user_role" FromRole="user" ToRole="role" />
+        </EntityType>
+        <Association Name="FK_user_role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kristineEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK_user_role" Association="Self.FK_user_role">
+            <End Role="role" EntitySet="roles" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kristineModelStoreContainer" CdmEntityContainer="kristineEntities1">
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="kristineModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role1" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="kristineModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
